@@ -36,6 +36,17 @@ const placedetails = async (req,res)=>{
 
         _place.news = (newsresponse.data.articles[al] && newsresponse.data.articles[al].content) || "No news for this place found"
 
+        var currencyapikey = 'e2be45965d5c4bd68b35a4e631a6c4fb'
+        var currencyurl = `https://openexchangerates.org/api/currencies.json?app_id=${currencyapikey}`
+
+        const currencyheader = {
+            'Content-Type': 'application/json'
+        }
+        var currencyresponse = await axios.get(currencyurl, currencyheader)
+        var currencydata = currencyresponse.data
+
+        _place.currencies = currencydata
+
         res.render('pages/placedetails', _place)
 
     } catch (error) {

@@ -36,24 +36,51 @@
   <div class="jumbotron px-0 hero bg-white">
     <img class="heroimg" src = <%= photos.photoUri %>>
   </div>
-  <div>
+  <div class = "w-75">
     <h3>News</h3>
     <p><%= news %></p>
   </div>
 
   <div>
     <h3>How much will it cost in your local currency</h3>
-    <input type="number">
-    <select>
-      <option>USD</option>
-      <option>NGN</option>
-      <option>CAD</option>
-    </select>
-    <select>
-      <option>USD</option>
-      <option>NGN</option>
-      <option>CAD</option>
-    </select>
+    <table>
+      <tbody>
+        <tr>
+          <td>Amount</td>
+          <td>From</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number">
+          </td>
+          <td>    
+            <select>
+              <% for (const key in currencies) { %>
+                <option><%= key %>: <%= currencies[key] %></option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>Amount</td>
+          <td>To</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="number">
+          </td>
+          <td>    
+            <select>
+              <% for (const key in currencies) { %>
+                <option><%= key %>: <%= currencies[key] %></option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 
