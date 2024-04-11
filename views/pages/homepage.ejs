@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<style>
+  .hero{
+    background-image: url('/images/hero.png');
+    background-size: cover;
+  }
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    width:80%;
+    
+  }
+  img{
+    width: 150px;
+    height: 150px;
+  }
+  .container-item{
+    width: 200px;
+    height: 300px;
+  }
+  .content{
+    height: 1000px;
+    overflow: scroll;
+  }
+</style>
+<body class="container-fluid">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron hero">
+    <h1>This is great</h1>
+    <p>Welcome to templating using EJS</p>
+  </div>
+
+  <div class="content">
+    <h2>Countries</h2>
+    <div class = "container">
+      <% countries.forEach(function(country) { %>
+        <div class = "container-item">
+          <a href="/country/country-attractions/<%- country.name.common %>">
+            <img src= <%= country.flags.png %>>
+            <div>
+              <strong><%= country.name.common %></strong>
+            </div>
+          </a>
+        </div>
+      <% }); 
+      %>
+    </div>
+
+
+  </div>
+
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

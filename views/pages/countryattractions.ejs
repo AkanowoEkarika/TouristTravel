@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<style>
+  .hero{
+    background-image: url('/images/hero.png');
+    background-size: cover;
+  }
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    width:80%;
+    
+  }
+  img{
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+  }
+  .container-item{
+    width: 200px;
+    height: 300px;
+  }
+</style>
+<body class="container-fluid">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron hero">
+    <h1>This is great</h1>
+    <p>Welcome to templating using EJS</p>
+  </div>
+
+
+<div class = "container">
+  <% places.forEach(function(place) { %>
+    <div class = "container-item">
+      <a href="/place/place-details/<%= place.place.id %>">
+        <strong><%= place.place.displayName.text %></strong>
+        <div> <%= place.place.formattedAddress %></div>
+        <img src = <%= place.photos.photoUri %>>
+      </a>
+    </div>
+  <% }); 
+  %>
+</div>
+
+
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

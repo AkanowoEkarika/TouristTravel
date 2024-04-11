@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<style>
+  .heroimg{
+    width: inherit;
+    height: inherit;
+  }
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    width:80%;
+    
+  }
+  img{
+    width: 150px;
+    height: 150px;
+  }
+  .container-item{
+    width: 200px;
+    height: 300px;
+  }
+</style>
+<body class="container-fluid">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <h3>
+    <%= displayName.text %>
+  </h3>
+  <div class="jumbotron px-0 hero bg-white">
+    <img class="heroimg" src = <%= photos.photoUri %>>
+  </div>
+  <div>
+    <h3>News</h3>
+    <p><%= news %></p>
+  </div>
+
+  <div>
+    <h3>How much will it cost in your local currency</h3>
+    <input type="number">
+    <select>
+      <option>USD</option>
+      <option>NGN</option>
+      <option>CAD</option>
+    </select>
+    <select>
+      <option>USD</option>
+      <option>NGN</option>
+      <option>CAD</option>
+    </select>
+  </div>
+
+
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
