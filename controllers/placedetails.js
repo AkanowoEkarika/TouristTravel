@@ -9,7 +9,7 @@ const placedetails = async (req,res)=>{
     const headers = {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': apiKey,
-        'X-Goog-FieldMask': 'displayName,location,addressComponents,adrFormatAddress,formattedAddress,priceLevel,photos'
+        'X-Goog-FieldMask': 'displayName,location,addressComponents,editorialSummary,adrFormatAddress,formattedAddress,priceLevel,photos'
     };
 
     try {
@@ -28,9 +28,13 @@ const placedetails = async (req,res)=>{
         _place.photos = photoresponsedata
 
         var acl = (_place.addressComponents && _place.addressComponents.length-1) || 0
+        var shortText = _place.addressComponents[acl] && _place.addressComponents[acl].shortText.toLowerCase()
+        if(shortText.length>2)
+            shortText = _place.addressComponents[acl-1] && _place.addressComponents[acl-1].shortText.toLowerCase()
 
+        _place.summary = place.editorialSummary && place.editorialSummary.text
         const newsapikey = '78d6984f17434b62b7cb29da819afe09'
-        const newsurl = `https://newsapi.org/v2/top-headlines?country=${_place.addressComponents[acl] && _place.addressComponents[acl].shortText.toLowerCase()}&apiKey=${newsapikey}&sortBy=popularity`
+        const newsurl = `https://newsapi.org/v2/top-headlines?country=${shortText}&apiKey=${newsapikey}&sortBy=popularity`
         var newsresponse = await axios.get(newsurl)
         var al = (newsresponse.data.articles && newsresponse.data.articles.length-1) || 0
 

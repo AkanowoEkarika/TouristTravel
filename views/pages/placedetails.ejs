@@ -2,11 +2,48 @@
 <html lang="en">
 <head>
   <%- include('../partials/head'); %>
-</head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    async function convertCurrencyFrom() {
+      const tocurrency = document.getElementById('tocurrency').value;
+      const fromcurrency = document.getElementById('fromcurrency').value;
+      const amount = document.getElementById('fromamount').value;
+  
+      try {
+        const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        const exchangeRates = response.data.rates;
+        const convertedAmount = amount * exchangeRates.USD; // Assuming we convert to USD, change as needed
+  
+        document.getElementById('toamount').value = convertedAmount.toFixed(2);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  
+    async function convertCurrencyTo() {
+      debugger
+      const fromcurrency = document.getElementById('tocurrency').value;
+      const tocurrency = document.getElementById('fromcurrency').value;
+      const amount = document.getElementById('toamount').value;
+  
+      try {
+        const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        const exchangeRates = response.data.rates;
+        const convertedAmount = amount * exchangeRates.USD; // Assuming we convert to USD, change as needed
+  
+        document.getElementById('fromamount').value = convertedAmount.toFixed(2);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  
+  </script>
+  
+  </head>
 <style>
   .heroimg{
-    width: inherit;
-    height: inherit;
+    width: 1000px;
+    height: 1000px;
   }
   .container{
     display: flex;
@@ -37,6 +74,10 @@
     <img class="heroimg" src = <%= photos.photoUri %>>
   </div>
   <div class = "w-75">
+    <h3>About this Place</h3>
+    <p><%= summary %></p>
+  </div>
+  <div class = "w-75">
     <h3>News</h3>
     <p><%= news %></p>
   </div>
@@ -51,12 +92,14 @@
         </tr>
         <tr>
           <td>
-            <input type="number">
+            <input id="fromamount" type="number">
           </td>
           <td>    
-            <select>
+            <select id="fromcurrency" onchange="convertCurrencyFrom()">
               <% for (const key in currencies) { %>
-                <option><%= key %>: <%= currencies[key] %></option>
+                <option value=<%= key %> 
+                  <% if(key=="USD") { %> selected <% }%>
+                  ><%= key %>: <%= currencies[key] %></option>
               <% } %>
             </select>
           </td>
@@ -69,12 +112,12 @@
         </tr>
         <tr>
           <td>
-            <input type="number">
+            <input id="toamount" type="number">
           </td>
           <td>    
-            <select>
+            <select id="tocurrency" onchange="convertCurrencyTo()">
               <% for (const key in currencies) { %>
-                <option><%= key %>: <%= currencies[key] %></option>
+                <option value=<%= key %>><%= key %>: <%= currencies[key] %></option>
               <% } %>
             </select>
           </td>
@@ -89,6 +132,7 @@
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
+
 
 </body>
 </html>

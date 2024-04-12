@@ -12,7 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     width:80%;
-    
+    column-gap:20px;
   }
   img{
     width: 150px;
@@ -32,17 +32,17 @@
 
 <main>
   <div class="jumbotron hero">
-    <h1>This is great</h1>
-    <p>Welcome to templating using EJS</p>
   </div>
 
 
-<div class = "container">
+<div class = "container column-gap-3">
   <% places.forEach(function(place) { %>
-    <div class = "container-item">
+    <div class = "container-item mb-5">
       <a href="/place/place-details/<%= place.place.id %>">
-        <strong><%= place.place.displayName.text %></strong>
-        <div> <%= place.place.formattedAddress %></div>
+        <div class = "h-25">
+          <strong><%= place.place.displayName.text %></strong>
+        </div>
+        <div class = "h-25"> <%= place.place.formattedAddress %></div>
         <img src = <%= place.photos.photoUri %>>
       </a>
     </div>
