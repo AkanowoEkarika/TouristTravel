@@ -10,9 +10,10 @@
       const amount = document.getElementById('fromamount').value;
   
       try {
-        const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        // const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        const response = await axios.get(`https://openexchangerates.org/api/latest.json?base=USD&prettyprint=false&show_alternative=false&app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
         const exchangeRates = response.data.rates;
-        const convertedAmount = amount * exchangeRates.USD; // Assuming we convert to USD, change as needed
+        const convertedAmount = amount * exchangeRates[fromcurrency]; // Assuming we convert to USD, change as needed
   
         document.getElementById('toamount').value = convertedAmount.toFixed(2);
       } catch (error) {
@@ -27,9 +28,10 @@
       const amount = document.getElementById('toamount').value;
   
       try {
-        const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        // const response = await axios.get(`https://openexchangerates.org/api/convert/${amount}/${fromcurrency}/${tocurrency}?app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
+        const response = await axios.get(`https://openexchangerates.org/api/latest.json?base=USD&prettyprint=false&show_alternative=false&app_id=e2be45965d5c4bd68b35a4e631a6c4fb`);
         const exchangeRates = response.data.rates;
-        const convertedAmount = amount * exchangeRates.USD; // Assuming we convert to USD, change as needed
+        const convertedAmount = amount * exchangeRates[fromcurrency]; // Assuming we convert to USD, change as needed
   
         document.getElementById('fromamount').value = convertedAmount.toFixed(2);
       } catch (error) {

@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'assets')))
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use('/home', router1); 
+app.use('/', router1); 
 app.use('/country', router2); 
 app.use('/place', router3); 
 

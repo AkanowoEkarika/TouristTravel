@@ -17,7 +17,7 @@ const {
  const router2 = express.Router()
  const router3 = express.Router()
 
-router1.get('/homepage', homepage)
+router1.get('/', homepage)
 router2.get('/country-attractions/:countryname', countryattractions)
 router3.get('/place-details/:placeId', placedetails)
 
